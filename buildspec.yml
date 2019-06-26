@@ -11,7 +11,6 @@ phases:
       - echo "CODEBUILD_RESOLVED_SOURCE_VERSION:${CODEBUILD_RESOLVED_SOURCE_VERSION}" | tee -a sns-message.txt
       - echo "DOCKER_COMPOSE_VERSION:${DOCKER_COMPOSE_VERSION}" | tee -a sns-message.txt
       - echo Sending notification ...
-      - aws sns publish --topic-arn "${SNS_TOPIC_ARN}" --subject "AWS CodeBuild Started - ${CODEBUILD_BUILD_ID}" --message file://sns-message.txt
       - echo Logging in to Amazon ECR ... | tee -a log.txt
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION  --no-include-email)
       - echo Pulling Docker Images for cache ... | tee -a log.txt
